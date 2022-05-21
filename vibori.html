@@ -1,0 +1,85 @@
+<html>
+<head><title>Собрал Сам</title>
+<link rel=stylesheet type="text/css" href="style1.css">
+<link rel=stylesheet type="text/css" href="style2.css">
+</head>
+<body onLoad="load()">
+<script>
+let coms=[];
+let i=JSON.parse(localStorage.getItem("int"));
+let am=JSON.parse(localStorage.getItem("amd"));
+function Otsav()
+{let x;
+ if (document.getElementById("AMD").checked == true) {x="AMD"; am++;}
+ else {x="Intel"; i++;} 
+ let comName=document.getElementById("name");
+ let comEmail=document.getElementById("email");
+ let comPole=document.getElementById("pole");
+ if (comName.value==""||comEmail.value==""||comPole.value==""){return;}
+ let mas={nic: comName.value,em: comEmail.value, text: comPole.value, vib: x};
+ comName.value="";
+ comEmail.value="";
+ comPole.value="";
+ coms.push(mas);
+ save();
+ show();
+ shotAMD();
+ shotINT();
+}
+function save()
+{localStorage.setItem("coms", JSON.stringify(coms));}
+function load()
+{if (localStorage.getItem("coms")) coms=JSON.parse(localStorage.getItem("coms"));
+show();
+shotAMD();
+shotINT();}
+function show()
+{let commentField=document.getElementById("otsiv");
+ let out="";
+ coms.forEach(function(item){
+   out +=`<div class="ramca v"><div class="dots m">${item.nic}`;
+   out +=`&nbsp${item.em}</div>`;
+   out +=`<div class="dots m">Выбор за:${item.vib}</div>`;
+   out +=`<div class="ramots m" id=t>${item.text}</div></div><br>`;});
+commentField.innerHTML=out;}
+function shotAMD()
+{let num = am;
+ let shtA = num.toString(); 
+ localStorage.setItem("amd", shtA);
+ let commentField=document.getElementById("a");
+ let outA=JSON.parse(localStorage.getItem("amd"));
+commentField.innerHTML=outA;}
+function shotINT()
+{let num = i;
+ let shtI = num.toString(); 
+ localStorage.setItem("int", shtI);
+ let commentField=document.getElementById("intel");
+ let outA=JSON.parse(localStorage.getItem("int"));
+commentField.innerHTML=outA;}
+</script>
+<div class="ima k">
+AMD VS INTEL
+</div>
+<div class="glav ramca p" ALIGN=CENTER>
+<a href="main.html">Каталог</a>
+<a href="vibori.html">Проголосовать</a> 
+<a href="kontakt.html">Контакты</a>   
+</div>
+<div  class="ima k o">Голоса</div><br>
+<div  class="ramca rama ima o ot">AMD:<span id=a></span>&nbsp&nbsp&nbsp&nbsp&nbspIntel:<span id=intel></span></div><br>
+<div  class="ima k o">Отзывы</div>
+<div id=otsiv class="pol"></div><br>
+<form id=f class="dots ramca pol">
+<p><label>Никнейм</label>
+    <input type="text" class="ramots n" name="name" id="name" required></p>
+<p><label>Email</label>
+    <input type="email" class="ramots n" name="email" id="email" required></p>
+<p>
+<label><input type="radio" name="dot" id=AMD checked>AMD</label>
+<label><input type="radio" name="dot" id=Int>Intel</label>
+</p>
+<p><textarea class="pole ramots n" id="pole" required></textarea></p>
+<button class="ramots" type="submit" id="cnopca" onClick="Otsav()">Оставить отзыв</button>
+</form>
+</body> 
+</html>
