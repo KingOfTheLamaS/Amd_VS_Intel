@@ -38,7 +38,7 @@ function show()
  let out="";
  coms.forEach(function(item){
    out +=`<div class="ramca v"><div class="dots m">${item.nic}`;
-   out +=`&nbsp${item.em}</div>`;
+   out +=`&nbsp<a href="mailto:${item.em}">${item.em}</a></div>`;
    out +=`<div class="dots m">Выбор за:${item.vib}</div>`;
    out +=`<div class="ramots m" id=t>${item.text}</div></div><br>`;});
 commentField.innerHTML=out;}
